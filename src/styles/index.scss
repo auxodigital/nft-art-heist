@@ -1,0 +1,15 @@
+section {
+    background-color: #ccc;
+    padding: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    min-height: 100svh;
+}
+
+#home-hero {
+    background-image: url('/images/art-heist.webp');
+    background-size: cover;
+}

@@ -1,0 +1,131 @@
+.heistContainer {
+    padding: 20px;
+    text-align: center;
+    background-color: #121212;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1c1c1c 0%, #282828 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.title,
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+    animation: fadeIn 1.5s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.gridContainer {
+    margin-top: 20px;
+}
+
+.card {
+    position: relative;
+    height: 450px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #1e1e1e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition:
+        transform 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+    &:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+}
+
+.cardMedia {
+    filter: brightness(0.4);
+    transition:
+        filter 0.3s ease-in-out,
+        transform 0.3s ease-in-out;
+    &:hover {
+        filter: brightness(0.8);
+        transform: scale(1.05);
+    }
+}
+
+.cardContent {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    transition: background 0.3s ease;
+}
+
+.selectField {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.iconButton {
+    color: #fff;
+}
+
+.difficultyText {
+    font-weight: bold;
+}
+
+.startButton {
+    margin-top: 20px;
+    background-color: #e91e63;
+    color: #fff;
+    font-weight: bold;
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+    box-shadow:
+        0 0 10px #e91e63,
+        0 0 20px #e91e63,
+        0 0 30px #e91e63;
+    &:hover {
+        background-color: #d81b60;
+        box-shadow:
+            0 0 20px #d81b60,
+            0 0 40px #d81b60,
+            0 0 60px #d81b60;
+    }
+    &:focus {
+        animation: pulse 1s infinite;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow:
+            0 0 10px #e91e63,
+            0 0 20px #e91e63,
+            0 0 30px #e91e63;
+    }
+    50% {
+        box-shadow:
+            0 0 20px #e91e63,
+            0 0 40px #e91e63,
+            0 0 60px #e91e63;
+    }
+    100% {
+        box-shadow:
+            0 0 10px #e91e63,
+            0 0 20px #e91e63,
+            0 0 30px #e91e63;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

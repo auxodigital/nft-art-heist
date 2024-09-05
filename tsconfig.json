@@ -20,6 +20,6 @@
             "types": ["./src/types/index.ts"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "stackbit.config.ts"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "stackbit.config.ts", "src/pages/[[...slug]].js"],
     "exclude": ["node_modules"]
 }
