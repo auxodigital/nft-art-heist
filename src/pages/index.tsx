@@ -7,7 +7,7 @@ const Home = () => {
         <section>
             <div>
                 <h1>NFT Art Heist</h1>
-                <p>Steal the NFT and it's yours to keep!</p>
+                <p>Steal the NFT and it&apos;s yours to keep!</p>
                 <Link href={'/heist'}>
                     <Button color="primary">ENTER HEIST</Button>
                 </Link>
