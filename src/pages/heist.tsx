@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, CardContent, Typography, Select, MenuItem, Tooltip, Button, CardMedia, IconButton, Card, CardActions } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Howl } from 'howler';
@@ -10,7 +10,7 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import styles from '../styles/Heist.module.scss';
 
 const Heist = () => {
-    const [strategy, setStrategy] = useState({
+    const [strategy, setStrategy] = useState<any>({
         entry: '',
         opportunity: '',
         steal: '',
@@ -18,7 +18,7 @@ const Heist = () => {
     });
 
     const handleChange = (level: string, value: string) => {
-        setStrategy((prevStrategy) => {
+        setStrategy((prevStrategy: any) => {
             const updatedStrategy = { ...prevStrategy, [level]: value };
             console.log('Updated strategy:', updatedStrategy);
             return updatedStrategy;
@@ -100,7 +100,6 @@ const Heist = () => {
         sound.play();
     };
 
-    // Function to render MenuItem components based on the level
     const renderMenuItems = (level: string) => {
         switch (level) {
             case 'entry':
@@ -109,29 +108,14 @@ const Heist = () => {
                         Visitor
                     </MenuItem>,
                     <MenuItem key="Disguise" value="Disguise">
-                        Disguise
+                        Disguise as Guard
                     </MenuItem>,
                     <MenuItem key="Janitor" value="Janitor">
                         Janitor
-                    </MenuItem>,
-                    <MenuItem key="Roof" value="Roof">
-                        Roof
-                    </MenuItem>,
-                    <MenuItem key="Back Door" value="Back Door">
-                        Back Door
-                    </MenuItem>,
-                    <MenuItem key="Sewer System" value="Sewer System">
-                        Sewer System
                     </MenuItem>
                 ];
             case 'opportunity':
                 return [
-                    <MenuItem key="Blend In" value="Blend In">
-                        Blend In, Sneak & Hack System
-                    </MenuItem>,
-                    <MenuItem key="Distraction" value="Distraction">
-                        Create Distraction & Cause Chaos
-                    </MenuItem>,
                     <MenuItem key="Disable Cameras" value="Disable Cameras">
                         Disable Cameras
                     </MenuItem>,
@@ -139,7 +123,7 @@ const Heist = () => {
                         Cut Power
                     </MenuItem>,
                     <MenuItem key="Knock Out Guard" value="Knock Out Guard">
-                        Knock Out Guard
+                        Distract Guards
                     </MenuItem>
                 ];
             case 'escape':
@@ -159,14 +143,30 @@ const Heist = () => {
         }
     };
 
+    // useEffect for looping background music
+    useEffect(() => {
+        const sound = new Howl({
+            src: ['/sounds/intro.mp3'], // Ensure this path is correct
+            loop: true,
+            volume: 0.35 // Adjust the volume if needed
+        });
+
+        sound.play();
+
+        // Clean up to stop the sound when the component unmounts
+        return () => {
+            sound.stop();
+        };
+    }, []);
+
     return (
         <div className={styles.heistContainer}>
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+            <motion.div initial={{ opacity: 0, y: 200 }} animate={{ opacity: 1, y: 40 }} transition={{ duration: 1 }}>
                 <Typography variant="h4" className={styles.title} gutterBottom>
-                    Welcome to the Heist
+                    Prepare for the Heist
                 </Typography>
                 <Typography variant="h6" className={styles.subtitle} gutterBottom>
-                    Lay out your strategy
+                    Choose your strategy wisely, your choices will have consequences.
                 </Typography>
             </motion.div>
             <Grid container spacing={4} justifyContent="center" className={styles.gridContainer}>
@@ -175,7 +175,7 @@ const Heist = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.2, duration: 0.5 }}
+                            // transition={{ delay: index * 0.2, duration: 0.5 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ type: 'spring', stiffness: 300 }}
@@ -184,10 +184,10 @@ const Heist = () => {
                                 <CardMedia component="img" height="250" image={getImage(level)} alt={`${level} Strategy`} className={styles.cardMedia} />
                                 <CardContent className={styles.cardContent}>
                                     <Typography variant="h6" gutterBottom>
-                                        {level === 'entry' ? 'Entry Strategy' : level === 'opportunity' ? 'Create Opportunity' : 'Escape Route'}
                                         <IconButton className={styles.iconButton} size="small">
                                             {level === 'entry' ? <SecurityIcon /> : level === 'opportunity' ? <HttpsIcon /> : <ExitToAppIcon />}
-                                        </IconButton>
+                                        </IconButton>{' '}
+                                        {level === 'entry' ? 'Method of Entry' : level === 'opportunity' ? 'Diversion' : 'Escape Route'}
                                     </Typography>
                                     <Select
                                         value={strategy[level]} // This should reflect the current state

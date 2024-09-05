@@ -39,18 +39,19 @@
     &:hover {
         transform: translateY(-10px) scale(1.03);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+
+        .cardMedia {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
     }
 }
 
 .cardMedia {
-    filter: brightness(0.4);
+    filter: brightness(0.6);
     transition:
         filter 0.3s ease-in-out,
         transform 0.3s ease-in-out;
-    &:hover {
-        filter: brightness(0.8);
-        transform: scale(1.05);
-    }
 }
 
 .cardContent {
